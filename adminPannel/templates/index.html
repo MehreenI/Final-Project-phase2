@@ -1,0 +1,580 @@
+{% extends 'layout/base.html' %} 
+
+
+{% block Page_id %}index{% endblock Page_id %}
+
+
+{% block content %}
+
+{% comment %} SLIDER  {% endcomment %}
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="1000">
+  <ol class="carousel-indicators">
+    {% for i in slider %}
+    <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter0 }}" {%if forloop.first %}class="active"{%endif%}></li>
+    {% endfor %}
+  </ol>
+
+  <div class="carousel-inner">
+
+    {% for i in slider %}
+    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+      <img
+        class="d-block w-100"
+        src="{{ i.image.url }}"
+        alt="{{ i.heading }}"
+      />
+    </div>
+
+    {% endfor %}
+
+  </div>
+
+  <a
+    class="carousel-control-prev"
+    href="#carouselExampleIndicators"
+    role="button"
+    data-slide="prev">
+
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+
+  </a>
+  <a
+    class="carousel-control-next"
+    href="#carouselExampleIndicators"
+    role="button"
+    data-slide="next">
+
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<main>
+  <!-- ========================================================================================================================================================================= -->
+  <!--*************************************************************************** Category Section ************************************************************************** -->
+  <!-- ========================================================================================================================================================================= -->
+
+  <section>
+    <div class="category-section cat-new-feat container">
+      <div class="category-tag heading">
+        <h2>Shop By Category</h2>
+        <hr />
+      </div>
+
+      <div class="category d-flex">
+
+        {% for i in categories %}
+        <!-- category -->
+        <div class="cate-card category-grid">
+
+          <!-- Category Image -->
+          <img src="{{ i.image.url }}" alt="img" id="category-image" />
+          <div class="cate-content">
+            <div>
+              <h2>{{ i.category_name }}</h2>
+              <a href="/products/{{i.id}}" class="go-to-store">GO TO STORE</a>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================================================================================================================= -->
+  <!--*************************************************************************** Latest Product and Discounted Product Section ************************************************************************** -->
+  <!-- ========================================================================================================================================================================= -->
+
+  <section class="latest_Products">
+
+    <div class="category-section cat-new-feat container">
+
+      <div class="category-tag heading">
+        <h2>Latest Products</h2>
+        <hr />
+      </div>
+
+      <div class="tab">
+        <button
+          class="tablinks"
+          onclick="openCity(event, 'new-arrival')"
+          id="defaultOpen">
+          New Arrival
+        </button>
+        <button class="tablinks" onclick="openCity(event, 'sale')">
+          Discounted Product
+        </button>
+      </div>
+
+      <!-- Tab content -->
+      <div id="new-arrival" class="tabcontent">
+
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+          
+          {% for new_product in new_arrival %}
+          <div class="col mb-5">
+            <div class="card h-100">
+
+              {% if new_product.discounted_price > 0 %}
+              <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                Sale
+              </div>
+              {% endif %}
+
+              <!-- new_product image-->
+              <img
+                class="card-img-top"
+                src="{{new_product.image.url}}"
+                alt="..."
+              />
+
+              <!-- new_product details-->
+              <div class="card-body p-4">
+
+                <div class="text-center">
+
+                  <!-- new_product name-->
+                  <h5 class="fw-bolder">{{ new_product.name }}</h5>
+                  <ul class="list-unstyled d-flex justify-content-center">
+                    <li>
+                      <i class="fa-sm
+                      {% if new_product.avg_ratings >= 1 %}
+                      fa-star fas
+                      {% else %}
+                      far fa-star
+                      {% endif %}" style="color: #f9d71c;"></i>
+                    </li>
+                    <li>
+                      <i class="fa-sm
+                      {% if new_product.avg_ratings >= 2 %}
+                      fa-star fas
+                      {% else %}
+                      far fa-star
+                      {% endif %}" style="color: #f9d71c;"></i>
+                    </li>
+                    <li>
+                      <i class="fa-sm
+                      {% if new_product.avg_ratings >= 3 %}
+                      fa-star fas
+                      {% else %}
+                      far fa-star
+                      {% endif %}" style="color: #f9d71c;"></i>
+                    </li>
+                    <li>
+                      <i class="fa-sm
+                      {% if new_product.avg_ratings >= 4 %}
+                      fa-star fas
+                      {% else %}
+                      far fa-star
+                      {% endif %}" style="color: #f9d71c;"></i>
+                    </li>
+                    <li>
+                      <i class="fa-sm
+                      {% if new_product.avg_ratings >= 5 %}
+                      fa-star fas
+                      {% else %}
+                      far fa-star
+                      {% endif %}" style="color: #f9d71c;"></i>
+                    </li>
+                  </ul>
+                  <h6>{{new_product.short_description}}</h6>
+
+                  <!-- new_product price-->
+                  <!-- if product discounted price is greater than 0-->
+                  {% if new_product.discounted_price > 0 %}
+
+
+                  <span class="fw-bolder"> ${{ new_product.discounted_price }} </span>
+                  <span class="text-muted text-decoration-line-through mr-3 dis-price">
+                    ${{ new_product.original_price }}
+                  </span>
+                  <span class="percantage">
+                    {{ new_product.get_percantage }}% OFF
+                  </span>
+                    
+                  {% else %} 
+                  <h6 class="fw-bolder d-inline-block">Price: </h4>
+
+                  <span class="fw-bolder"> ${{ new_product.original_price }} </span>
+                   {% endif %}
+
+                  <br />
+                </div>
+              </div>
+
+              <!-- new_product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a
+                    class="btn btn-outline-dark mt-auto"
+                    href="/productDetail/{{new_product.id}}"
+                    >View Product</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div id="sale" class="tabcontent">
+        <div
+          class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+        >
+          {% for sale_product in sale %}
+          <div class="col mb-5">
+            <div class="card h-100">
+              {% if sale_product.discounted_price > 0 %}
+              <div
+                class="badge bg-dark text-white position-absolute"
+                style="top: 0.5rem; right: 0.5rem"
+              >
+                Sale
+              </div>
+              {% endif %}
+
+              <!-- sale_product image-->
+              <img
+                class="card-img-top"
+                src="{{sale_product.image.url}}"
+                alt="..."
+              />
+              <!-- sale_product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+
+                  <!-- new_product name-->
+                  <h5 class="fw-bolder">{{ sale_product.name }}</h5>
+                  <ul class="list-unstyled d-flex justify-content-center">
+                    <li>
+                      <i class="fa-sm
+                      {% if sale_product.avg_ratings >= 1 %}
+                      fa-star fas
+                      {% else %}
+                      far fa-star
+                      {% endif %}" style="color: #f9d71c;"></i>
+                    </li>
+                    <li>
+                      <i class="fa-sm
+                      {% if sale_product.avg_ratings >= 2 %}
+                      fa-star fas
+                      {% else %}
+                      far fa-star
+                      {% endif %}" style="color: #f9d71c;"></i>
+                    </li>
+                    <li>
+                      <i class="fa-sm
+                      {% if sale_product.avg_ratings >= 3 %}
+                      fa-star fas
+                      {% else %}
+                      far fa-star
+                      {% endif %}" style="color: #f9d71c;"></i>
+                    </li>
+                    <li>
+                      <i class="fa-sm
+                      {% if sale_product.avg_ratings >= 4 %}
+                      fa-star fas
+                      {% else %}
+                      far fa-star
+                      {% endif %}" style="color: #f9d71c;"></i>
+                    </li>
+                    <li>
+                      <i class="fa-sm
+                      {% if sale_product.avg_ratings >= 5 %}
+                      fa-star fas
+                      {% else %}
+                      far fa-star
+                      {% endif %}" style="color: #f9d71c;"></i>
+                    </li>
+                  </ul>
+                  <h6>{{sale_product.short_description}}</h6>
+
+                  <!-- sale_product price-->
+                  <span class="fw-bolder"> ${{ sale_product.discounted_price }} </span>
+                  <span class="text-muted text-decoration-line-through mr-3 dis-price">
+                    ${{ sale_product.original_price }}
+                  </span>
+                  <span class="percantage">
+                    {{ sale_product.get_percantage }}% OFF
+                  </span>
+                  <br />
+                </div>
+              </div>
+              <!-- sale_product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a
+                    class="btn btn-outline-dark mt-auto"
+                    href="/productDetail/{{sale_product.id}}">
+                    View Product
+                </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================================================================================================================= -->
+  <!--*************************************************************************** ABOUT US Section ************************************************************************** -->
+  <!-- ========================================================================================================================================================================= -->
+
+  <section class="index-about mt-5 mb-5">
+    <div class="row">
+      <div class="col-sm-8 index-grid-img">
+        <img src="../media/about/about_us.png" alt="" id="about-img" />
+      </div>
+      <div class="about-text-content col-sm-4">
+        <div class="content">
+          <small>ABOUT US</small>
+          <h3>Adjustable Comfort & Luxury – Astor Sofa Set</h3>
+          <p>
+            Experience unmatched comfort and luxury with our adjustable Astor
+            sofa set. Featuring breathable air leather and wide armrests, Astor
+            also features manually adjustable backrests that fold back to create
+            deeper seating, perfect for lying back and reading, watching TV and
+            more.
+          </p>
+          <p>
+            Discover the unmatched luxury and comfort of our range of 1, 2 &amp;
+            3 Astor sofa seaters.
+          </p>
+          <a class="text-button" href="/products">Shop Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================================================================================================================= -->
+  <!--*************************************************************************** Featured Product Section ************************************************************************** -->
+  <!-- ========================================================================================================================================================================= -->
+
+  <section>
+    <div class="featured-section cat-new-feat container">
+      <div class="featured-tag heading">
+        <h2>Featured Products</h2>
+        <hr />
+      </div>
+      <div
+        class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+      >
+        {% for featured_product in featured_products %}
+        <div class="col mb-5">
+          <div class="card h-100">
+            {% if featured_product.discounted_price > 0 %}
+            <div
+              class="badge bg-dark text-white position-absolute"
+              style="top: 0.5rem; right: 0.5rem">
+              Sale
+            </div>
+            {% endif %}
+
+            <!-- featured_product image-->
+            <img
+              class="card-img-top"
+              src="{{featured_product.image.url}}"
+              alt="..." />
+
+            <!-- featured_product details-->
+            <div class="card-body p-4">
+              <div class="text-center">
+
+                <!-- new_product name-->
+                <h5 class="fw-bolder">{{ featured_product.name }}</h5>
+                <ul class="list-unstyled d-flex justify-content-center">
+                  <li>
+                    <i class="fa-sm
+                    {% if featured_product.avg_ratings >= 1 %}
+                    fa-star fas
+                    {% else %}
+                    far fa-star
+                    {% endif %}" style="color: #f9d71c;"></i>
+                  </li>
+                  <li>
+                    <i class="fa-sm
+                    {% if featured_product.avg_ratings >= 2 %}
+                    fa-star fas
+                    {% else %}
+                    far fa-star
+                    {% endif %}" style="color: #f9d71c;"></i>
+                  </li>
+                  <li>
+                    <i class="fa-sm
+                    {% if featured_product.avg_ratings >= 3 %}
+                    fa-star fas
+                    {% else %}
+                    far fa-star
+                    {% endif %}" style="color: #f9d71c;"></i>
+                  </li>
+                  <li>
+                    <i class="fa-sm
+                    {% if featured_product.avg_ratings >= 4 %}
+                    fa-star fas
+                    {% else %}
+                    far fa-star
+                    {% endif %}" style="color: #f9d71c;"></i>
+                  </li>
+                  <li>
+                    <i class="fa-sm
+                    {% if featured_product.avg_ratings >= 5 %}
+                    fa-star fas
+                    {% else %}
+                    far fa-star
+                    {% endif %}" style="color: #f9d71c;"></i>
+                  </li>
+                </ul>
+                <h6>{{featured_product.short_description}}</h6>
+
+                <!-- featured_product price-->
+                  <!-- if product discounted price is greater than 0-->
+                {% if featured_product.discounted_price > 0 %}
+
+
+                <span class="fw-bolder"> ${{ featured_product.discounted_price }} </span>
+                <span class="text-muted text-decoration-line-through mr-3 dis-price">
+                  ${{ featured_product.original_price }}
+                </span>
+                <span class="percantage">
+                  {{ featured_product.get_percantage }}% OFF
+                </span>
+                  
+
+
+                {% else %} 
+                <h6 class="fw-bolder d-inline-block">Price: </h4>
+
+                <span class="fw-bolder"> ${{ featured_product.original_price }} </span>
+                 {% endif %}
+
+                <br />
+              </div>
+            </div>
+
+            <!-- featured_product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+              <div class="text-center">
+                <a
+                  class="btn btn-outline-dark mt-auto"
+                  href="/productDetail/{{featured_product.id}}"
+                  >View Product</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+
+  
+
+  <section class="video" style="width: 100%; height: 550px">
+    <iframe
+      width="100%"
+      height="550px"
+      src="https://www.youtube.com/embed/nluIrlkbCLo?autoplay=1&controls=0"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </section>
+
+
+  <!-- ========================================================================================================================================================================= -->
+  <!--*************************************************************************** Adding Testimonials Section ************************************************************************** -->
+  <!-- ========================================================================================================================================================================= -->
+
+
+    <section class="testimonials" style="color: #000; background-color: #f3f2f2">
+      <div class="container py-5">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-10 col-xl-8 text-center">
+            <h3 class="fw-bold mb-4">Testimonials</h3>
+            <p class="mb-4 pb-2 mb-md-5 pb-md-0">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit,
+              error amet numquam iure provident voluptate esse quasi, veritatis
+              totam voluptas nostrum quisquam eum porro a pariatur veniam.
+            </p>
+          </div>
+        </div>
+
+        <div class="row text-center">
+          {% for testimonial in testimonials %}
+          <div class="col-md-4 mb-4 mb-md-0">
+            <div class="card">
+              <div class="card-body py-4 mt-2">
+                <div class="d-flex justify-content-center mb-4">
+                  <img
+                    src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png"
+                    class="rounded-circle shadow-1-strong"
+                    width="100"
+                    height="100"
+                  />
+                </div>
+                <h5 class="font-weight-bold">{{testimonial.name}}</h5>
+                <ul class="list-unstyled d-flex justify-content-center">
+                  <li>
+                    <i class="fa-sm
+                    {% if testimonial.rating >= 1 %}
+                    fa-star fas
+                    {% else %}
+                    far fa-star
+                    {% endif %}" style="color: #f9d71c;"></i>
+                  </li>
+                  <li>
+                    <i class="fa-sm
+                    {% if testimonial.rating >= 2 %}
+                    fa-star fas
+                    {% else %}
+                    far fa-star
+                    {% endif %}" style="color: #f9d71c;"></i>
+                  </li>
+                  <li>
+                    <i class="fa-sm
+                    {% if testimonial.rating >= 3 %}
+                    fa-star fas
+                    {% else %}
+                    far fa-star
+                    {% endif %}" style="color: #f9d71c;"></i>
+                  </li>
+                  <li>
+                    <i class="fa-sm
+                    {% if testimonial.rating >= 4 %}
+                    fa-star fas
+                    {% else %}
+                    far fa-star
+                    {% endif %}" style="color: #f9d71c;"></i>
+                  </li>
+                  <li>
+                    <i class="fa-sm
+                    {% if testimonial.rating >= 5 %}
+                    fa-star fas
+                    {% else %}
+                    far fa-star
+                    {% endif %}" style="color: #f9d71c;"></i>
+                  </li>
+                </ul>
+                <p class="mb-2">
+                  <i class="fas fa-quote-left pe-2"></i>{{testimonial.comment}}
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+</main>
+
+{% endblock content %}
+
+

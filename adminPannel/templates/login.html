@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href={% static 'login.css' %}>
+</head>
+<body>
+    <div class="container">
+        <div class="login_box">
+            <h1>Login</h1>
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <div class="input_box">
+                    <input type="text" required="" name="username">
+                    <label for="">UserName</label>
+                    <ion-icon class="icon " name="mail-outline"></ion-icon>
+                </div>
+                <div class="input_box">
+                    <input type="password" required="" name="password">
+                    <label for="">Password</label>
+                    <ion-icon class="icon" name="lock-closed-outline"></ion-icon>
+                </div>
+                <div class="rem">
+                    <input id="chack" type="checkbox">
+                    <label for="chack">Remember me</label>
+                    <a href="#">Forget password</a>
+                </div>
+                <div class="login">
+                    <input type="submit" value="Login">                
+                </div>
+            </form>
+            
+            <div>
+                <div class="reg">
+                    <p>don't have a account </p>
+                    <a href="/registration">Registration</a>
+                </div>
+            </div>
+        </div>
+     </div>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

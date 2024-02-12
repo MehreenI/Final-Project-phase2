@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href={% static 'login.css' %}>
+</head>
+<body>
+    <div class="container">
+        <div class="login_box">
+            <h1>REGISTER</h1>
+            <div class="row">
+                <form action="/register-account/" method="post">
+                    {% csrf_token %}
+                    <div class="col">
+                        <div class="input_box">
+                            <input type="text" required="" name="firstName">
+                            <label for="">First Name</label>
+                            <ion-icon class="icon " name="person-outline"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input_box">
+                            <input type="text" required="" name="lastName">
+                            <label for="">Last Name</label>
+                            <ion-icon class="icon" name="person-outline"></ion-icon>
+                        </div>
+                    </div>
+    
+                </div>
+                <div class="input_box">
+                    <input type="email" required="" name="email">
+                    <label for="">Email</label>
+                    <ion-icon class="icon " name="mail-outline"></ion-icon>
+                </div>
+                <div class="input_box">
+                    <input type="password" required="" name="password">
+                    <label for="">password</label>
+                    <ion-icon class="icon" name="lock-closed-outline"></ion-icon>
+                </div>
+                <div class="rem">
+                    <input id="chack" type="checkbox">
+                    <label for="chack">remember me</label>
+                    <a href="#">forget password</a>
+                </div>
+                <div class="login">
+<input type="submit" value="Login">                
+</div>
+                </form>
+            <div>
+                <div class="reg">
+                    <p>Already have a account:  </p>
+                    <a href="/login-account">Login</a>
+                </div>
+            </div>
+        </div>
+     </div>
+     
+    
+        
+    
+    
+    
+    
+    
+    
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

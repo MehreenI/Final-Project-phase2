@@ -1,0 +1,178 @@
+{% extends 'layout/base.html' %} {% block content %}
+{% block Page_id %} contact-page {% endblock Page_id %} 
+
+<!--****************************************** Hero Section ******************************************* -->
+
+<section class="hero">
+  <div class="hero_content">
+    <h1>Contact</h1>
+
+    <div class="hero-content-elements">
+      <a class="anchor" href="../index.html">Home</a>
+      <span class="separator"> > </span>
+      <span class="contact"> Contact Us</span>
+    </div>
+  </div>
+</section>
+
+<!--****************************************** Map Section ******************************************* -->
+
+<div class="map font-family">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3619.5463218218306!2d67.05700931391856!3d24.87933998404503!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33eed5d2a946f%3A0x86b0b26ae2d6432b!2sConsulNet%20Corporation!5e0!3m2!1sen!2s!4v1679683539767!5m2!1sen!2s"
+    width="100%"
+    height="450"
+    style="border: 0"
+    allowfullscreen
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
+</div>
+
+<!--****************************************** Contact Form Section ******************************************* -->
+
+<section>
+  <div class="contact-us-form container">
+    <div class="content d-flex">
+      <!-- ********************************************* Organization Detail ********************************************* -->
+      <div class="left-side">
+        <!-- Heading for contact information section -->
+        <h2>Contact Us</h2>
+
+        <!-- Address details -->
+        <div class="address details">
+          <div class="Title">
+            <h3>
+              <!-- Icon for address -->
+              <i class="fa-sharp fa-solid fa-house fa-beat-fade"></i>
+              Address
+            </h3>
+          </div>
+
+          <div class="title-content">
+            <p>
+              166 G/5, Block، 3, P.E.C.H.S. Block 3 PECHS, Karachi, Sindh 75400
+            </p>
+          </div>
+        </div>
+
+        <!-- Phone details -->
+        <div class="phone details">
+          <div class="Title">
+            <h3>
+              <!-- Icon for phone -->
+              <i class="fa-solid fa-phone fa-shake"></i>
+              Phone
+            </h3>
+          </div>
+
+          <div class="title-content">
+            <p>Mobile: +0098 9893 5647</p>
+            <p>Hotline: +0098 9893 5647</p>
+          </div>
+        </div>
+
+        <!-- Email details -->
+        <div class="email details">
+          <div class="Title">
+            <h3>
+              <!-- Icon for email -->
+              <i class="fa-solid fa-envelope fa-flip"></i>
+              Email
+            </h3>
+          </div>
+
+          <div class="title-content">
+            <p>abcd123@gmail.com</p>
+            <p>abcd@gmail.com</p>
+          </div>
+        </div>
+      </div>
+      <!-- left-side div End-->
+
+      <!-- ********************************************* Get In Touch ********************************************* -->
+
+      <div class="right-side">
+        <div class="topic-text">
+          <h2>Send us a message</h2>
+        </div>
+
+        {% if error %}
+        <div class="alert alert-danger">
+          <strong>Error!</strong> Please Fill all the fields.
+        </div>
+        {% elif success %}
+        <div class="alert alert-success">
+          <strong>Success!</strong> Message Send Successfully
+        </div>
+        
+        {% endif %}
+        <!-- Form for users to send a message -->
+        <form action="{% url 'contact' %}" id="signupForm" method="post">
+          {% csrf_token %}
+
+          <!-- Input field for user's name -->
+          <div class="input-box">
+            <label id="FirstName">First Name:<sup> * </sup></label>
+            <input
+              type="text"
+              placeholder="Enter your name"
+              name="name"
+              id="name"
+            />
+          </div>
+
+          <!-- Input field for user's email -->
+          <div class="input-box">
+            <label id="mail">Email:<sup> * </sup></label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              name="email"
+              id="email"
+            />
+          </div>
+
+          <!-- Input field for message subject -->
+          <div class="input-box">
+            <label id="sub">Subject<sup> * </sup></label>
+            <input
+              type="text"
+              name="subject"
+              id="subject"
+              placeholder="Subject"
+            />
+          </div>
+
+          <!-- Input field for message text -->
+          <div class="input-box message-box">
+            <label id="msg"
+              >Message:<span> <sup> * </sup></span></label
+            >
+            <textarea
+              name="message"
+              id="message"
+              cols="40"
+              rows="10"
+            ></textarea>
+          </div>
+
+          <!-- Submit button to send the message -->
+          <div class="button">
+            <input class="submit" type="submit" value="Submit" />
+          </div>
+        </form>
+        <!-- Form End Here-->
+      </div>
+      <!-- Right-side div End-->
+    </div>
+  </div>
+</section>
+<!-- Contact Form Section Ends -->
+{% endblock content %}
+
+
+{% block jsLink %}
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+{% endblock jsLink %}
+  

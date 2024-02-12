@@ -1,0 +1,114 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<section class="bg-dark py-5 banner">
+  <div class="container px-4 px-lg-5 my-5">
+      <div class="text-center text-white">
+          <h1 class="display-4 fw-bolder">Shop in style</h1>
+          <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+      </div>
+  </div>
+</section>
+  <!-- Section -->
+  <section class="py-5">
+
+    <div class="container px-4 px-lg-5 mt-5">
+      <p>We have found Total {{ products.count }} product</p>
+
+      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+        {% for product in products %}
+          <div class="col mb-5">
+
+            <div class="card h-100">
+              {% if product.discounted_price > 0 %}
+                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+              {% endif %}
+
+              <!-- Product image -->
+              <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+              <!-- Product details -->
+              <div class="card-body p-4">
+                <div class="text-center">
+
+                  <!-- product name-->
+                  <h5 class="fw-bolder">{{ product.name }}</h5>
+                  <ul class="list-unstyled d-flex justify-content-center">
+                    <li>
+                      <i class="fa-sm
+                      {% if product.avg_ratings >= 1 %}
+                      fa-star fas
+                      {% else %}
+                      far fa-star
+                      {% endif %}" style="color: #f9d71c;"></i>
+                    </li>
+                    <li>
+                      <i class="fa-sm
+                      {% if product.avg_ratings >= 2 %}
+                      fa-star fas
+                      {% else %}
+                      far fa-star
+                      {% endif %}" style="color: #f9d71c;"></i>
+                    </li>
+                    <li>
+                      <i class="fa-sm
+                      {% if product.avg_ratings >= 3 %}
+                      fa-star fas
+                      {% else %}
+                      far fa-star
+                      {% endif %}" style="color: #f9d71c;"></i>
+                    </li>
+                    <li>
+                      <i class="fa-sm
+                      {% if product.avg_ratings >= 4 %}
+                      fa-star fas
+                      {% else %}
+                      far fa-star
+                      {% endif %}" style="color: #f9d71c;"></i>
+                    </li>
+                    <li>
+                      <i class="fa-sm
+                      {% if product.avg_ratings >= 5 %}
+                      fa-star fas
+                      {% else %}
+                      far fa-star
+                      {% endif %}" style="color: #f9d71c;"></i>
+                    </li>
+                  </ul>
+                  <h6>{{product.short_description}}</h6>
+
+                  <!-- product price-->
+                    <!-- if product discounted price is greater than 0-->
+                  {% if product.discounted_price > 0 %}
+                  <span class="fw-bolder"> ${{ product.discounted_price }} </span>
+                  <span class="text-muted text-decoration-line-through mr-3 dis-price">
+                    ${{ product.original_price }}
+                  </span>
+                  <span class="percantage">
+                    {{ product.get_percantage }}% OFF
+                  </span>
+                    
+
+
+                  {% else %} 
+                  <h6 class="fw-bolder d-inline-block">Price: </h4>
+
+                  <span class="fw-bolder"> ${{ product.original_price }} </span>
+                   {% endif %}
+
+                  <br />
+                </div>
+              </div>
+              <!-- Product actions -->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a class="btn btn-outline-dark mt-auto" href="/productDetail/{{ product.id }}">View Product</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends 'layout/base.html' %} {% block content %}
+<section class="hero">
+  <div class="hero_content">
+    <h1>ABOUT US</h1>
+
+    <div class="hero-content-elements">
+      <a class="anchor" href="../index.html">Home</a>
+      <span class="separator">></span>
+      <span class="FAQ">About Us</span>
+    </div>
+  </div>
+</section>
+<main class="container">
+  <section>
+    <div class="row align-center">
+      <div class="col">
+        <img src="../media/about/Group_268.png" alt="Page not found image" />
+      </div>
+      <div class="col">
+        <h1>Know About Our Ecomerce Business, History</h1>
+        <p class="mt-4">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis neque
+          ultrices mattis aliquam, malesuada diam est. Malesuada sem tristique
+          amet erat vitae eget dolor lobortis. Accumsan faucibus vitae lobortis
+          quis bibendum quam.
+        </p>
+        <a href="{% url 'contact' %}" class="button mt-4">Contact us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-us">
+    <div class="heading">
+      <h2>Services We Provided</h2>
+      <hr />
+
+    </div>
+
+    <div
+      class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center mb-5"
+    >
+      <div class="col box cursor-pointer mb-5">
+        <div class="card h-100 p-3 cursor-pointer">
+          <img
+            src="../media/about/free-delivery.png"
+            alt="Page not found image"
+            class="box-img"
+          />
+          <div class="card-body p-4">
+            <div class="text-center">
+              <h3 class="fw-bolder">Free Delivery</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa
+                purus gravida.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col box cursor-pointer mb-5">
+        <div class="card h-100 p-3 cursor-pointer">
+          <img
+            src="../media/about/cashback_1.png"
+            alt="Page not found image"
+            class="box-img"
+          />
+          <div class="card-body p-4">
+            <div class="text-center">
+              <h3 class="fw-bolder">100% Cash Back</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa
+                purus gravida.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col box cursor-pointer mb-5">
+        <div class="card h-100 p-3 cursor-pointer">
+          <img
+            src="../media/about/premium-quality.png"
+            alt="Page not found image"
+            class="box-img"
+          />
+          <div class="card-body p-4">
+            <div class="text-center">
+              <h3 class="fw-bolder">Quality Product</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa
+                purus gravida.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col box cursor-pointer mb-5">
+        <div class="card h-100 p-3 ">
+          <img
+            src="../media/about/24-hours-support.png"
+            alt="Page not found image"
+            class="box-img"
+          />
+          <div class="card-body p-4">
+            <div class="text-center">
+              <h3 class="fw-bolder">24/7 Support</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa
+                purus gravida.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

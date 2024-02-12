@@ -1,0 +1,62 @@
+{% extends 'layout/base.html' %} 
+{% block Page_id %} FAQPage {% endblock Page_id %} 
+{%block content %}
+<!--****************************************** Hero Section ******************************************* -->
+
+<section class="hero">
+  <div class="hero_content">
+    <h1>Frequently Questions</h1>
+
+    <div class="hero-content-elements">
+      <a class="anchor" href="../index.html">Home</a>
+      <span class="separator"> > </span>
+      <span class="FAQ"> Frequently Questions</span>
+    </div>
+  </div>
+</section>
+<!--******************************************Page Content ******************************************* -->
+
+<section>
+  <div class="page-content container">
+    <h2>
+      Below Are Frequently Asked Questions, You May Find The Answer For Yourself
+    </h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id erat
+      sagittis, faucibus metus malesuada, eleifend turpis. Mauris semper augue
+      id nisl aliquet, a porta lectus mattis. Nulla at tortor augue. In eget
+      enim diam. Donec gravida tortor sem, ac fermentum nibh rutrum sit amet.
+      Nulla convallis mauris vitae congue consequat. Donec interdum nunc purus,
+      vitae vulputate arcu fringilla quis. Vivamus iaculis euismod dui.
+    </p>
+  </div>
+</section>
+<!-- Page Content Ends -->
+
+<div class="accordion container mb-5" id="accordionExample">
+  {% for faq in faqs %}
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading{{forloop.counter}}">
+      <button
+        class="accordion-button"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseOne"
+        aria-expanded="true"
+        aria-controls="collapseOne"
+      >
+        {{faq.question}}
+      </button>
+    </h2>
+    <div
+      id="collapse{{forloop.counter}}"
+      class="accordion-collapse collapse show"
+      aria-labelledby="heading{{forloop.counter}}"
+      data-bs-parent="#accordionExample"
+    >
+      <div class="accordion-body">{{faq.answer}}</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}

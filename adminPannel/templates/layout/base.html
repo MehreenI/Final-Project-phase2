@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zillion Store</title>
+    <link rel="stylesheet" href={% static "css/bootstrap/bootstrap.min.css" %}/>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Maps&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href={% static 'css/fontawesome/css/all.css' %} /> 
+	<link rel="stylesheet" type="text/css" href={% static 'css/OwlCarousel2/owl.carousel.min.css'%}>
+	<link rel="stylesheet" type="text/css" href={% static 'css/OwlCarousel2/owl.theme.default.min.css'%}>
+  
+    <link rel="stylesheet" href={% static 'styles.css' %}>
+
+</head>
+<body id="{% block Page_id %}{% endblock Page_id %}">
+
+    <header>
+        <div class="container">
+          <div class="header_flex">
+            <div class="logo">
+              <a href="/">ZILLION STORE</a>
+            </div>
+            <div class="d_flex gap_26">
+              <div class="d_flex gap_26">
+                <div class="contact_links">
+                  <div class="contact_icon">
+                    <img src="https://sudip-bhowmick.github.io/images/img/mail.svg" alt="mail">
+                    <a href="mailto:mehreen.imran2701@gmail.com">mehreen.imran2701@gmail.com</a>
+                    <img src="https://sudip-bhowmick.github.io/images/img/mail.svg" alt="mail">
+                    <a href="mailto:hina.zailai97@gmail.com">hina.zailai97@gmail.com</a>
+
+                  </div>
+                  <div class="contact_icon">
+                    <img src="https://sudip-bhowmick.github.io/images/img/call.svg" alt="call">
+                    <a href="tel:03312456789">+92 3312456789</a>
+                  </div>
+                </div>
+                <div class="social_links">
+                  <a href="#" target="_blank"><img src="https://sudip-bhowmick.github.io/images/img/linkedin.svg" alt="linkedin"></a>
+                  <a href="#" target="_blank"><img src="https://sudip-bhowmick.github.io/images/img/facebook.svg" alt="facebook"></a>
+                  <a href="#" target="_blank"><img src="https://sudip-bhowmick.github.io/images/img/twitter.svg" alt="twitter"></a>
+                </div>
+              </div>
+              <div class="header_cta">
+                {% if user.is_authenticated %}
+                    <a href="/logOut" class="btn_one">Log Out</a>
+                {% else %}
+                    <a href="/login-account" class="btn_one">Sign In</a>
+                {% endif %}
+            </div>
+            
+      
+              <button type="button" class="burger" id="burger">
+                <span class="burger_line"></span>
+                <span class="burger_line"></span>
+                <span class="burger_line"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="overlay"></div>
+        <nav class="dark_bg" id="menu">
+          <div class="container">
+            <ul>
+              <li><a href="/" class={% if request.path == "/" %} "active" {% endif%}>Home</a></li>
+              <li><a href="/products" class={% if request.path == "/products/" %} "active" {% endif%}>Products</a></li>
+              <li><a href="/about-us" class={% if request.path == "/about-us/" %} "active" {% endif%}>About us</a></li>
+              <li><a href="/faq" class={% if request.path == "/faq/" %} "active" {% endif%}>FAQ</a></li>
+              <li><a href="/contact" class={% if request.path == "/contact/" %} "active" {% endif%}>Contact us</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      
+      {% block content %}
+        
+      {% endblock content %}
+    
+      <footer>
+        <div class="container"  style="background-color: #021b51;">
+            <div class="footer_content">
+                <div class="footer_logo">
+                    <a href="/" style="color: white;">ZILLION STORE</a>
+                </div>
+                <div class="footer_links">
+                    <ul>
+                        <li><a href="#" class="footer_link">Privacy Policy</a></li>
+                        <li><a href="#" class="footer_link">Terms of Service</a></li>
+                        <li><a href="#" class="footer_link">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer_copy">
+                <p>&copy; 2024 Your Website. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src={% static 'js/jquery/jquery.min.js' %}></script>
+      <!-- Bootstrap JavaScript Libraries -->
+    <script src={% static 'js/bootstrap/popper.min.js' %}></script>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src={% static 'js/bootstrap/bootstrap.bundle.min.js' %}></script>
+
+    <script src={% static 'js/OwlCarousel/popper.min.js' %}></script>
+
+    <script src={% static 'js/OwlCarousel/owl.carousel.min.js' %}></script>
+
+    <script src="https://kit.fontawesome.com/366357b146.js" crossorigin="anonymous"></script>
+
+    {% block jsLink %}{% endblock jsLink %}
+    <script src= {% static 'custom.js' %}></script>
+    
+</body>
+
+</html>
